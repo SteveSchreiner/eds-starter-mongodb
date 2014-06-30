@@ -1,0 +1,15 @@
+spring:
+  profiles: development
+
+server:
+  port: 8080
+
+---
+spring:
+  profiles: default
+
+  resources:
+    cachePeriod: 31556926
+
+server:
+  port: 80
