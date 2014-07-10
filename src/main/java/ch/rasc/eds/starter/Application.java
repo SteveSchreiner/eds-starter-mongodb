@@ -2,26 +2,28 @@ package ch.rasc.eds.starter;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 
+import org.apache.coyote.http11.AbstractHttp11Protocol;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.ServletContextInitializer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import ch.rasc.edsutil.optimizer.WebResourceProcessor;
 
 @Configuration
 @ComponentScan(basePackages = { "ch.ralscha.extdirectspring", "ch.rasc.eds.starter" })
@@ -52,32 +54,45 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 	@Bean
-	@Profile("default")
-	public FilterRegistrationBean disableExtCacheFilter() {
-		FilterRegistrationBean frb = new FilterRegistrationBean();
-		frb.setUrlPatterns(Arrays.asList("/", "/index.html"));
-		frb.setFilter(new Filter() {
+	public ServletContextInitializer servletContextInitializer(
+			final Environment environment) {
+		return servletContext -> {
+			try {
+				WebResourceProcessor processor = new WebResourceProcessor(servletContext,
+						environment.acceptsProfiles("default"), "/static");
+				processor.process();
 
-			@Override
-			public void init(FilterConfig filterConfig) throws ServletException {
-				// nothing here
+				ClassPathResource cpr = new ClassPathResource("index.html");
+				String indexHtml = StreamUtils.copyToString(cpr.getInputStream(),
+						StandardCharsets.UTF_8);
+				indexHtml = indexHtml.replace("application.app_css",
+						(String) servletContext.getAttribute("app_css"));
+				indexHtml = indexHtml.replace("application.app_js",
+						(String) servletContext.getAttribute("app_js"));
+				servletContext.setAttribute("index.html", indexHtml);
 			}
-
-			@Override
-			public void doFilter(ServletRequest request, ServletResponse response,
-					FilterChain chain) throws IOException, ServletException {
-				Cookie cookie = new Cookie("ext-cache", "1");
-				((HttpServletResponse) response).addCookie(cookie);
-				chain.doFilter(request, response);
+			catch (IOException e) {
+				LoggerFactory.getLogger(Application.class).error("read index.html", e);
 			}
-
-			@Override
-			public void destroy() {
-				// nothing here
-			}
-		});
-
-		return frb;
+		};
 	}
 
+	@Bean
+	@Profile("default")
+	public EmbeddedServletContainerCustomizer servletContainerCustomizer() {
+		System.out.println("SET GZIP ON");
+		return servletContainer -> ((TomcatEmbeddedServletContainerFactory) servletContainer)
+				.addConnectorCustomizers(connector -> {
+					AbstractHttp11Protocol<?> httpProtocol = (AbstractHttp11Protocol<?>) connector
+							.getProtocolHandler();
+					httpProtocol.setCompression("on");
+					httpProtocol.setCompressionMinSize(512);
+					String mimeTypes = httpProtocol.getCompressableMimeTypes();
+					String additionalMimeTypes = mimeTypes + ","
+							+ MediaType.APPLICATION_JSON_VALUE + ","
+							+ "application/javascript,text/css";
+
+					httpProtocol.setCompressableMimeTypes(additionalMimeTypes);
+				});
+	}
 }

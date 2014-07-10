@@ -1,19 +1,18 @@
-Ext.define('SimpleApp.view.crud.UserPanel', {
+Ext.define('SimpleApp.view.crud.UserGrid', {
 	extend: 'Ext.grid.Panel',
-	alias: 'widget.userpanel',
-	controller: 'user',
+	alias: 'widget.SimpleApp-view-crud-UserGrid',
+	requires: ['SimpleApp.view.crud.UserController', 'SimpleApp.view.crud.UserModel'],
+	
+	reference: 'userpanel',
+	
+	controller: 'SimpleApp-view-crud-UserController',
 	viewModel: {
-		type: 'user'
+		type: 'SimpleApp-view-crud-UserModel'
 	},
 
 	title: 'CRUD with MongoDB',
 	bind: {
 		store: '{users}'
-	},
-
-	listeners: {
-		itemclick: 'onItemClick',
-		scope: 'controller'
 	},
 
 	columns: [ {
@@ -59,11 +58,12 @@ Ext.define('SimpleApp.view.crud.UserPanel', {
 		}, {
 			text: 'Delete',
 			handler: 'deleteUser',
-			disabled: true,
-			reference: 'deleteButton'
+			bind: {
+				disabled: '{!userSelected}'
+			}
 		}, '->', {
-			fieldLabel: 'Filter',
-			labelWidth: 40,
+			fieldLabel: 'E-Mail Filter',
+			labelWidth: 80,
 			xtype: 'textfield',
 			reference: 'filtertextfield',
 			listeners: {
