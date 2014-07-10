@@ -23,7 +23,7 @@ public class InitialDataLoad {
 	@Autowired
 	public InitialDataLoad(UserRepository userRepository) throws IOException {
 		this.userRepository = userRepository;
-		init(new ClassPathResource("/randomdata.csv.compressed"));
+		init(new ClassPathResource("randomdata.csv.compressed"));
 	}
 
 	private void init(ClassPathResource randomDataResource) throws IOException {
