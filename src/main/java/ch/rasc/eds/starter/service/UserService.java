@@ -15,8 +15,8 @@ import ch.ralscha.extdirectspring.bean.ExtDirectStoreReadRequest;
 import ch.ralscha.extdirectspring.bean.ExtDirectStoreResult;
 import ch.ralscha.extdirectspring.filter.StringFilter;
 import ch.rasc.eds.starter.bean.User;
-import ch.rasc.eds.starter.repository.RepositoryUtil;
 import ch.rasc.eds.starter.repository.UserRepository;
+import ch.rasc.edsutil.RepositoryUtil;
 
 @Service
 public class UserService {
@@ -43,11 +43,11 @@ public class UserService {
 		if (StringUtils.hasText(filterValue)) {
 			filterValue = Pattern.quote(filterValue);
 			usersPage = userRepository.findByEmailLike(filterValue,
-					RepositoryUtil.createPageRequest(storeRequest));
+					RepositoryUtil.createPageable(storeRequest));
 		}
 		else {
 			usersPage = userRepository.findAll(RepositoryUtil
-					.createPageRequest(storeRequest));
+					.createPageable(storeRequest));
 		}
 
 		return new ExtDirectStoreResult<>(usersPage.getTotalElements(),
