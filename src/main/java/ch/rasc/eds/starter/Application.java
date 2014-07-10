@@ -59,7 +59,7 @@ public class Application extends SpringBootServletInitializer {
 		return servletContext -> {
 			try {
 				WebResourceProcessor processor = new WebResourceProcessor(servletContext,
-						environment.acceptsProfiles("default"), "/static");
+						environment.acceptsProfiles("default"));
 				processor.process();
 
 				ClassPathResource cpr = new ClassPathResource("index.html");
@@ -80,7 +80,6 @@ public class Application extends SpringBootServletInitializer {
 	@Bean
 	@Profile("default")
 	public EmbeddedServletContainerCustomizer servletContainerCustomizer() {
-		System.out.println("SET GZIP ON");
 		return servletContainer -> ((TomcatEmbeddedServletContainerFactory) servletContainer)
 				.addConnectorCustomizers(connector -> {
 					AbstractHttp11Protocol<?> httpProtocol = (AbstractHttp11Protocol<?>) connector

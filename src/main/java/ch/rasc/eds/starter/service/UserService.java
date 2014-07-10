@@ -58,7 +58,7 @@ public class UserService {
 	public ExtDirectStoreResult<User> create(User newUser) {
 		newUser.setId(null);
 		User insertedUser = userRepository.save(newUser);
-		System.out.println("NEW USER: " + insertedUser.getId());
+
 		return new ExtDirectStoreResult<>(insertedUser);
 	}
 
@@ -70,7 +70,6 @@ public class UserService {
 
 	@ExtDirectMethod(STORE_MODIFY)
 	public void destroy(User destroyUser) {
-		System.out.println("DESTROY USER: " + destroyUser);
 		userRepository.delete(destroyUser);
 	}
 
