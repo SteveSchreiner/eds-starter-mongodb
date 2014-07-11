@@ -58,8 +58,9 @@ public class Application extends SpringBootServletInitializer {
 			final Environment environment) {
 		return servletContext -> {
 			try {
+				boolean isDefaultProfileActive = environment.acceptsProfiles("default");
 				WebResourceProcessor processor = new WebResourceProcessor(servletContext,
-						environment.acceptsProfiles("default"));
+						isDefaultProfileActive);
 				processor.process();
 
 				ClassPathResource cpr = new ClassPathResource("index.html");
@@ -78,7 +79,7 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 	@Bean
-	@Profile("default")
+	@Profile("compression")
 	public EmbeddedServletContainerCustomizer servletContainerCustomizer() {
 		return servletContainer -> ((TomcatEmbeddedServletContainerFactory) servletContainer)
 				.addConnectorCustomizers(connector -> {
