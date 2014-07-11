@@ -143,18 +143,6 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>static/build</directory>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
-
-			<plugin>
 				<groupId>com.googlecode.jslint4java</groupId>
 				<artifactId>jslint4java-maven-plugin</artifactId>
 				<version>2.0.5</version>
@@ -168,7 +156,7 @@
 						<configuration>
 							<failOnError>false</failOnError>
 							<sourceFolders>
-								<sourceFolder>${project.basedir}/static/app</sourceFolder>
+								<sourceFolder>${project.basedir}/src/main/resources/static/app</sourceFolder>
 							</sourceFolders>
 
 							<options>
@@ -178,7 +166,7 @@
 								<vars>true</vars>
 								<unparam>true</unparam>
 								<plusplus>true</plusplus>
-								<predef>Ext,formLoadService,formSubmitService,pollService,storeService,treeLoadService</predef>
+								<predef>Ext</predef>
 							</options>
 						</configuration>
 					</execution>
@@ -219,15 +207,5 @@
 		</plugins>
 
 	</build>
-
-	<profiles>
-		<profile>
-			<id>prod</id>
-			<properties>
-				<sencha.env>production</sencha.env>
-			</properties>
-		</profile>
-	</profiles>
-
 
 </project>
