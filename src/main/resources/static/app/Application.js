@@ -1,6 +1,6 @@
 Ext.define('SimpleApp.Application', {
 	extend: 'Ext.app.Application',
-	
+
 	name: 'SimpleApp',
 
 	constructor: function() {
