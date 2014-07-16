@@ -10,7 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import ch.rasc.extclassgenerator.Model;
 import ch.rasc.extclassgenerator.ModelField;
 
-@Model(value = "SimpleApp.model.User", rootProperty = "records", createMethod = "userService.create", readMethod = "userService.read", updateMethod = "userService.update", destroyMethod = "userService.destroy")
+@Model(value = "SimpleApp.model.User", rootProperty = "records",
+		createMethod = "userService.create", readMethod = "userService.read",
+		updateMethod = "userService.update", destroyMethod = "userService.destroy")
 @Document(collection = "users")
 @TypeAlias("user")
 public class User {
