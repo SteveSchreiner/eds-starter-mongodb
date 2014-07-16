@@ -1,13 +1,15 @@
 Ext.define('SimpleApp.view.crud.UserGrid', {
 	extend: 'Ext.grid.Panel',
-	alias: 'widget.SimpleApp-view-crud-UserGrid',
-	requires: ['SimpleApp.view.crud.UserController', 'SimpleApp.view.crud.UserModel'],
-	
-	reference: 'userpanel',
-	
-	controller: 'SimpleApp-view-crud-UserController',
+
+	requires: [ 'SimpleApp.view.crud.UserController', 'SimpleApp.view.crud.UserModel' ],
+
+	reference: 'userGrid',
+
+	controller: {
+		xclass: 'SimpleApp.view.crud.UserController'
+	},
 	viewModel: {
-		type: 'SimpleApp-view-crud-UserModel'
+		xclass: 'SimpleApp.view.crud.UserModel'
 	},
 
 	title: 'CRUD with MongoDB',
@@ -16,7 +18,6 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 	},
 
 	columns: [ {
-		xtype: 'gridcolumn',
 		dataIndex: 'firstName',
 		text: 'First Name',
 		flex: 1,
@@ -25,7 +26,6 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 			allowBlank: false
 		}
 	}, {
-		xtype: 'gridcolumn',
 		dataIndex: 'lastName',
 		text: 'Last Name',
 		flex: 1,
@@ -34,7 +34,6 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 			allowBlank: false
 		}
 	}, {
-		xtype: 'gridcolumn',
 		dataIndex: 'email',
 		text: 'Email',
 		flex: 1,
@@ -45,9 +44,10 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 		}
 	} ],
 
-	plugins: [ Ext.create('Ext.grid.plugin.RowEditing', {
+	plugins: {
+		ptype: 'rowediting',
 		pluginId: 'storePanelRowEditing'
-	}) ],
+	},
 
 	dockedItems: [ {
 		xtype: 'toolbar',
@@ -65,7 +65,6 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 			fieldLabel: 'E-Mail Filter',
 			labelWidth: 80,
 			xtype: 'textfield',
-			reference: 'filtertextfield',
 			listeners: {
 				change: {
 					fn: 'filterChange',
@@ -75,7 +74,7 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 		} ]
 	}, {
 		xtype: 'pagingtoolbar',
-		reference: 'pagingtoolbar',		
+		reference: 'pagingtoolbar',
 		dock: 'bottom',
 		displayInfo: true
 	} ]
