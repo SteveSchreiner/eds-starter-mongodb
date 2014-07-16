@@ -19,7 +19,7 @@ Ext.define('SimpleApp.view.crud.UserModel', {
 			pageSize: 25,
 			remoteSort: true,
 			remoteFilter: true,
-			autoSync: true,
+			autoSync: false,
 			sorters: [ {
 				property: 'lastName',
 				direction: 'ASC'

@@ -17,6 +17,11 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 		store: '{users}'
 	},
 
+	listeners: {
+		canceledit: 'onCancelEdit',
+		edit: 'onEdit'
+	},
+
 	columns: [ {
 		dataIndex: 'firstName',
 		text: 'First Name',

@@ -40,6 +40,16 @@ Ext.define('SimpleApp.view.crud.UserController', {
 		}
 	},
 
+	onCancelEdit: function(editor, context, eOpts) {
+		if (context.record.phantom) {
+			this.getStore('users').remove(context.record);
+		}
+	},
+
+	onEdit: function() {
+		this.getStore('users').sync();
+	},
+
 	newUser: function() {
 		var newUser = Ext.create('SimpleApp.model.User', {
 			lastName: 'New',
