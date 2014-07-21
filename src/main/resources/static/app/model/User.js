@@ -1,7 +1,7 @@
 Ext.define("SimpleApp.model.User",
 {
   extend : "Ext.data.Model",
-  requires : [ "Ext.data.validator.Email", "Ext.data.validator.Presence" ],
+  requires : [ "Ext.data.proxy.Direct", "Ext.data.validator.Email", "Ext.data.validator.Presence" ],
   fields : [ {
     name : "id",
     type : "string"
