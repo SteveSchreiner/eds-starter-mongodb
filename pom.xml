@@ -21,8 +21,10 @@
 		<tomcat.version>8.0.9</tomcat.version>
 		<jackson.version>2.4.1</jackson.version>
         <ext.version>5.0.1.1109-NIGHTLY</ext.version>
+		<spring-data-releasetrain.version>Dijkstra-SR3</spring-data-releasetrain.version>
+		<mongodb.version>2.12.3</mongodb.version>
+		<hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
 
-		<sencha.env>testing</sencha.env>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
 		
@@ -100,7 +102,13 @@
 
 		<dependency>
 			<groupId>resources</groupId>
-			<artifactId>ext-theme-neptune</artifactId>
+			<artifactId>ext-theme-crisp</artifactId>
+			<version>${ext.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>resources</groupId>
+			<artifactId>ext-sencha-charts</artifactId>
 			<version>${ext.version}</version>
 		</dependency>
 
@@ -166,7 +174,7 @@
 								<vars>true</vars>
 								<unparam>true</unparam>
 								<plusplus>true</plusplus>
-								<predef>Ext</predef>
+								<predef>Ext,formLoadService</predef>
 							</options>
 						</configuration>
 					</execution>
