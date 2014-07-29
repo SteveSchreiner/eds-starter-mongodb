@@ -54,7 +54,8 @@ Ext.define('SimpleApp.view.crud.UserController', {
 		var newUser = Ext.create('SimpleApp.model.User', {
 			lastName: 'New',
 			firstName: 'Person',
-			email: 'new@email.com'
+			email: 'new@email.com',
+			department: 'Company'
 		});
 
 		this.getStore('users').insert(0, newUser);

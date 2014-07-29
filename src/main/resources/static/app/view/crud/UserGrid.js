@@ -12,7 +12,7 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 		xclass: 'SimpleApp.view.crud.UserModel'
 	},
 
-	title: 'CRUD with MongoDB',
+	title: 'STORE_READ and STORE_MODIFY',
 	bind: {
 		store: '{users}'
 	},
@@ -47,6 +47,17 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 			allowBlank: false,
 			vtype: 'email'
 		}
+	}, {
+		dataIndex: 'department',
+		text: 'Department',
+		flex: 1,
+		editor: {
+			xtype: 'combobox',
+			store: 'Companies',
+			queryMode: 'local',
+			displayField: 'text',
+			valueField: 'text'
+		}
 	} ],
 
 	plugins: {
@@ -67,8 +78,8 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 				disabled: '{!userSelected}'
 			}
 		}, '->', {
-			fieldLabel: 'E-Mail Filter',
-			labelWidth: 80,
+			fieldLabel: 'Filter',
+			labelWidth: 40,
 			xtype: 'textfield',
 			listeners: {
 				change: {

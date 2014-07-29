@@ -8,30 +8,26 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import ch.rasc.extclassgenerator.Model;
-import ch.rasc.extclassgenerator.ModelField;
 
 @Model(value = "SimpleApp.model.User", rootProperty = "records",
 		createMethod = "userService.create", readMethod = "userService.read",
-		updateMethod = "userService.update", destroyMethod = "userService.destroy")
+		updateMethod = "userService.update", destroyMethod = "userService.destroy",
+		autodetectTypes = false)
 @Document(collection = "users")
-@TypeAlias("user")
+@TypeAlias("u")
 public class User {
 
 	@Id
 	private String id;
 
-	@ModelField(convert = "null")
 	private String firstName;
 
 	@NotNull
-	@ModelField(convert = "null")
 	private String lastName;
 
 	@Email
-	@ModelField(convert = "null")
 	private String email;
 
-	@ModelField(convert = "null")
 	private String department;
 
 	public User() {
