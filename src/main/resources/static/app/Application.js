@@ -1,7 +1,7 @@
 Ext.define('SimpleApp.Application', {
 	extend: 'Ext.app.Application',
-	requires: [ 'Ext.direct.PollingProvider', 'Ext.direct.RemotingProvider',
-			'Ext.form.action.DirectLoad', 'Ext.form.action.DirectSubmit' ],
+	requires: [ 'SimpleApp.controller.Root', 'SimpleApp.store.Companies',
+			'SimpleApp.model.PageHit', 'SimpleApp.model.User' ],
 	name: 'SimpleApp',
 
 	views: [],
