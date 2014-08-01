@@ -10,7 +10,6 @@ Ext.define('SimpleApp.view.crud.UserController', {
 	filterChange: function(field, newValue) {
 		var usersStore = this.getStore('users');
 		if (newValue) {
-			usersStore.clearFilter(true);
 			usersStore.filter('filter', newValue);
 		}
 		else {
