@@ -8,7 +8,7 @@ Ext.define('SimpleApp.view.poll.PollController', {
 			store.removeAll(true);
 
 			Ext.each(Ext.Date.monthNames, function(name, ix) {
-				store.add(Ext.create('SimpleApp.model.PageHit', {
+				store.add(new SimpleApp.model.PageHit({
 					month: name.substring(0, 3),
 					hit: event.data[ix]
 				}));

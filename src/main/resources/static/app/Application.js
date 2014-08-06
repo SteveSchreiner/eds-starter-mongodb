@@ -13,7 +13,7 @@ Ext.define('SimpleApp.Application', {
 	models: [ 'PageHit', 'User' ],
 
 	constructor: function() {
-		var chartDataPoller = Ext.create('Ext.direct.PollingProvider', {
+		var chartDataPoller = new Ext.direct.PollingProvider({
 			id: 'chartDataPoller',
 			type: 'polling',
 			interval: 5 * 1000, // 5 seconds

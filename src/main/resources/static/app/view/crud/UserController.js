@@ -50,7 +50,7 @@ Ext.define('SimpleApp.view.crud.UserController', {
 	},
 
 	newUser: function() {
-		var newUser = Ext.create('SimpleApp.model.User', {
+		var newUser = new SimpleApp.model.User({
 			lastName: 'New',
 			firstName: 'Person',
 			email: 'new@email.com',
