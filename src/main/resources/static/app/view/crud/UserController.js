@@ -30,7 +30,8 @@ Ext.define('SimpleApp.view.crud.UserController', {
 						html: 'User deleted',
 						title: 'Info',
 						width: 200,
-						align: 't'
+						align: 't',
+						shadow: true
 					});
 					this.getStore('users').load();
 				},
