@@ -1,9 +1,6 @@
 Ext.define('SimpleApp.view.crud.UserGrid', {
 	extend: 'Ext.grid.Panel',
-
 	requires: [ 'SimpleApp.view.crud.UserController', 'SimpleApp.view.crud.UserModel' ],
-
-	reference: 'userGrid',
 
 	controller: {
 		xclass: 'SimpleApp.view.crud.UserController'
@@ -14,7 +11,8 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 
 	title: 'STORE_READ and STORE_MODIFY',
 	bind: {
-		store: '{users}'
+		store: '{users}',
+		selection: '{selectedUser}'
 	},
 
 	listeners: {
@@ -75,7 +73,7 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 			text: 'Delete',
 			handler: 'deleteUser',
 			bind: {
-				disabled: '{!userSelected}'
+				disabled: '{!selectedUser}'
 			}
 		}, '->', {
 			fieldLabel: 'Filter',

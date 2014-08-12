@@ -1,15 +1,9 @@
 Ext.define('SimpleApp.view.crud.UserModel', {
 	extend: 'Ext.app.ViewModel',
-
 	requires: [ 'SimpleApp.model.User' ],
 
-	formulas: {
-		selectedUser: function(get) {
-			return get('userGrid.selection');
-		},
-		userSelected: function(get) {
-			return !!get('selectedUser');
-		}
+	data: {
+		selectedUser: null
 	},
 
 	stores: {
