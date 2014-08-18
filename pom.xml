@@ -20,7 +20,6 @@
 		<java.version>1.8</java.version>
 		<tomcat.version>8.0.9</tomcat.version>
 		<jackson.version>2.4.2</jackson.version>
-        <ext.version>5.0.1</ext.version>
 
 		<mongodb.version>2.12.3</mongodb.version>
 		<hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
@@ -31,24 +30,6 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'hh:mm:ss.SSSZ</maven.build.timestamp.format>
 		<build.timestamp>${maven.build.timestamp}</build.timestamp>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>rasc</id>
-			<url>http://repository.rasc.ch</url>
-		</repository>
-		<repository>
-			<id>sonatype</id>
-			<name>sonatype</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>		
-	</repositories>
 
 	<dependencies>
 
@@ -86,63 +67,10 @@
 			<version>1.0.5</version>
 		</dependency>
 
-		<dependency>
-			<groupId>resources</groupId>
-			<artifactId>ext-all-debug</artifactId>
-			<version>${ext.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>resources</groupId>
-			<artifactId>ext-all</artifactId>
-			<version>${ext.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>resources</groupId>
-			<artifactId>ext-theme-crisp</artifactId>
-			<version>${ext.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>resources</groupId>
-			<artifactId>ext-sencha-charts</artifactId>
-			<version>${ext.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.yahoo.platform.yui</groupId>
-			<artifactId>yuicompressor</artifactId>
-			<version>2.4.7</version>
-			<exclusions>
-				<exclusion>
-					<groupId>rhino</groupId>
-					<artifactId>js</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 	</dependencies>
 
 	<build>
-	
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>version.properties</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>version.properties</include>
-				</includes>
-			</resource>
-		</resources>	
-	
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

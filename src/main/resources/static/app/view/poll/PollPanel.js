@@ -1,7 +1,8 @@
 Ext.define('SimpleApp.view.poll.PollPanel', {
 	extend: 'Ext.panel.Panel',
 
-	requires: [ 'SimpleApp.view.poll.PollController', 'SimpleApp.view.poll.PollModel' ],
+	requires: [ 'SimpleApp.view.poll.PollController', 'SimpleApp.view.poll.PollModel', 
+	            'Ext.chart.axis.Category', 'Ext.chart.axis.Numeric', 'Ext.chart.series.Bar' ],
 
 	controller: {
 		xclass: 'SimpleApp.view.poll.PollController'
@@ -14,7 +15,7 @@ Ext.define('SimpleApp.view.poll.PollPanel', {
 	layout: 'fit',
 
 	items: [ {
-		xtype: 'chart',
+		xtype: 'cartesian',
 		animate: true,
 		insetPadding: 5,
 		margin: '10 0 0 0',

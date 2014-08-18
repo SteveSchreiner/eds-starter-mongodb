@@ -1,7 +1,7 @@
 Ext.define('SimpleApp.view.form.FormPanel', {
 	extend: 'Ext.form.Panel',
 
-	requires: [ 'SimpleApp.view.form.FormController' ],
+	requires: [ 'SimpleApp.view.form.FormController', 'Ext.form.action.DirectLoad', 'Ext.form.action.DirectSubmit' ],
 
 	controller: {
 		xclass: 'SimpleApp.view.form.FormController'

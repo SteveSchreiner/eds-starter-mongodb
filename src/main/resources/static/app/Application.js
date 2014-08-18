@@ -1,7 +1,8 @@
 Ext.define('SimpleApp.Application', {
 	extend: 'Ext.app.Application',
 	requires: [ 'SimpleApp.controller.Root', 'SimpleApp.store.Companies',
-			'SimpleApp.model.PageHit', 'SimpleApp.model.User' ],
+			'SimpleApp.model.PageHit', 'SimpleApp.model.User',
+			'Ext.direct.PollingProvider', 'Ext.direct.RemotingProvider', ],
 	name: 'SimpleApp',
 
 	views: [],
@@ -13,7 +14,7 @@ Ext.define('SimpleApp.Application', {
 	models: [ 'PageHit', 'User' ],
 
 	constructor: function() {
-		var chartDataPoller = new Ext.direct.PollingProvider({
+		var chartDataPoller = Ext.create('Ext.direct.PollingProvider', {
 			id: 'chartDataPoller',
 			type: 'polling',
 			interval: 5 * 1000, // 5 seconds
@@ -24,9 +25,5 @@ Ext.define('SimpleApp.Application', {
 		Ext.direct.Manager.getProvider('chartDataPoller').disconnect();
 
 		this.callParent(arguments);
-	},
-
-	launch: function() {
-		Ext.fly('appLoadingIndicator').destroy();
 	}
 });
