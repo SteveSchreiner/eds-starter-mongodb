@@ -1,6 +1,6 @@
 Ext.define('SimpleApp.view.crud.UserController', {
 	extend: 'Ext.app.ViewController',
-
+	requires: ['Ext.window.Toast'],
 	init: function(view) {
 		var usersStore = this.getStore('users');
 		usersStore.load();
