@@ -31,6 +31,24 @@
 		<build.timestamp>${maven.build.timestamp}</build.timestamp>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>rasc</id>
+			<url>http://repository.rasc.ch</url>
+		</repository>
+		<repository>
+			<id>sonatype</id>
+			<name>sonatype</name>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>		
+	</repositories>
+
 	<dependencies>
 
 		<dependency>
