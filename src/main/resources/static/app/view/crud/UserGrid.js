@@ -51,10 +51,10 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 		flex: 1,
 		editor: {
 			xtype: 'combobox',
-			store: 'Companies',
+			store: 'Departments',
 			queryMode: 'local',
-			displayField: 'text',
-			valueField: 'text'
+			displayField: 'name',
+			valueField: 'name'
 		}
 	} ],
 

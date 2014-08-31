@@ -2,13 +2,16 @@ Ext.define("SimpleApp.model.Department",
 {
   extend : "Ext.data.Model",
   requires : [ "Ext.data.proxy.Direct" ],
-  fields : [ "name" ],
+  fields : [ {
+    name : "id",
+    type : "string"
+  }, {
+    name : "name",
+    type : "string"
+  } ],
   proxy : {
     type : "direct",
     directFn : "departmentService.read",
-    reader : {
-      rootProperty : "records"
-    },
     writer : {
       writeAllFields : true
     }

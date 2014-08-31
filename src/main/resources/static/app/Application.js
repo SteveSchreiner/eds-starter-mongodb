@@ -8,7 +8,7 @@ Ext.define('SimpleApp.Application', {
 
 	controllers: [ 'Root' ],
 
-	stores: [ 'Companies' ],
+	stores: [ 'Companies', 'Departments' ],
 
 	models: [ 'PageHit', 'User' ],
 
