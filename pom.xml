@@ -13,16 +13,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.1.8.RELEASE </version>
+		<version>1.2.0.RC1</version>
 	</parent>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<tomcat.version>8.0.14</tomcat.version>
-		<jackson.version>2.4.3</jackson.version>
-		<ext.version>5.0.2.1372-NIGHTLY</ext.version>
+		<ext.version>5.0.2.1552-NIGHTLY</ext.version>
 
-		<mongodb.version>2.12.3</mongodb.version>
+		<mongodb.version>2.12.4</mongodb.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.debug>true</maven.compiler.debug>
@@ -36,7 +34,26 @@
 			<id>rasc</id>
 			<url>https://repo.rasc.ch</url>
 		</repository>		
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>	
 
 	<dependencies>
 
@@ -59,13 +76,13 @@
 		<dependency>
 			<groupId>ch.ralscha</groupId>
 			<artifactId>extdirectspring</artifactId>
-			<version>1.4.3</version>
+			<version>1.5.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>ch.rasc</groupId>
 			<artifactId>edsutil</artifactId>
-			<version>2.0.5</version>
+			<version>2.0.6</version>
 		</dependency>
 
 		<dependency>
@@ -202,5 +219,5 @@
 		</plugins>
 
 	</build>
-
+	
 </project>
