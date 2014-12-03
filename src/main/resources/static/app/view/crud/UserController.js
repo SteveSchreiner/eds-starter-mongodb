@@ -1,20 +1,8 @@
 Ext.define('SimpleApp.view.crud.UserController', {
 	extend: 'Ext.app.ViewController',
 
-	init: function(view) {
-		var usersStore = this.getStore('users');
-		usersStore.load();
-		this.lookupReference('pagingtoolbar').setStore(usersStore);
-	},
-
-	filterChange: function(field, newValue) {
-		var usersStore = this.getStore('users');
-		if (newValue) {
-			usersStore.filter('filter', newValue);
-		}
-		else {
-			usersStore.clearFilter();
-		}
+	onNamefilterChange: function(field, newValue) {
+		this.getViewModel().set('nameFilter', newValue);
 	},
 
 	deleteUser: function() {

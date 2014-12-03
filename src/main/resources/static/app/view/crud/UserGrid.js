@@ -76,13 +76,40 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 				disabled: '{!selectedUser}'
 			}
 		}, '->', {
-			fieldLabel: 'Filter',
-			labelWidth: 40,
+			emptyText: 'Name and Email Filter',
 			xtype: 'textfield',
 			listeners: {
 				change: {
-					fn: 'filterChange',
+					fn: 'onNamefilterChange',
 					buffer: 350
+				}
+			},
+			triggers: {
+				clear: {
+					cls: 'x-form-clear-trigger',
+					weight: 1,
+					handler: function(tf) {
+						tf.reset();
+					}
+				}
+			}
+		}, {
+			xtype: 'combobox',
+			reference: 'departmentFilterCB',
+			emptyText: 'Departments Filter',
+			store: 'Departments',
+			width: 200,
+			queryMode: 'local',
+			displayField: 'name',
+			valueField: 'name',
+			publishes: 'value',
+			triggers: {
+				clear: {
+					cls: 'x-form-clear-trigger',
+					weight: 1,
+					handler: function(cb) {
+						cb.reset();
+					}
 				}
 			}
 		} ]
@@ -90,7 +117,10 @@ Ext.define('SimpleApp.view.crud.UserGrid', {
 		xtype: 'pagingtoolbar',
 		reference: 'pagingtoolbar',
 		dock: 'bottom',
-		displayInfo: true
+		displayInfo: true,
+		bind: {
+			store: '{users}'
+		}
 	} ]
 
 });

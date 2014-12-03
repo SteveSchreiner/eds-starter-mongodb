@@ -12,7 +12,6 @@ import org.springframework.util.StringUtils;
 import ch.ralscha.extdirectspring.annotation.ExtDirectMethod;
 import ch.ralscha.extdirectspring.bean.ExtDirectStoreReadRequest;
 import ch.ralscha.extdirectspring.bean.ExtDirectStoreResult;
-import ch.ralscha.extdirectspring.filter.Filter;
 import ch.ralscha.extdirectspring.filter.StringFilter;
 import ch.rasc.eds.starter.bean.User;
 import ch.rasc.eds.starter.repository.UserRepository;
@@ -31,20 +30,33 @@ public class UserService {
 	@ExtDirectMethod(STORE_READ)
 	public ExtDirectStoreResult<User> read(ExtDirectStoreReadRequest readRequest) {
 
-		Filter nameFilter = readRequest.getFirstFilterForField("filter");
+		StringFilter nameFilter = readRequest.getFirstFilterForField("name");
+		StringFilter departmentFilter = readRequest.getFirstFilterForField("department");
 
 		String name = null;
 		if (nameFilter != null) {
-			name = ((StringFilter) nameFilter).getValue();
+			name = nameFilter.getValue();
+		}
+
+		String department = null;
+		if (departmentFilter != null) {
+			department = departmentFilter.getValue();
 		}
 
 		Page<User> pageResult;
 		Pageable pageRequest = RepositoryUtil.createPageable(readRequest);
 
-		if (StringUtils.hasText(name)) {
+		if (StringUtils.hasText(name) && !StringUtils.hasText(department)) {
 			pageResult = userRepository
 					.findByFirstNameStartsWithIgnoreCaseOrLastNameStartsWithIgnoreCaseOrEmailStartsWithIgnoreCase(
 							name, name, name, pageRequest);
+		}
+		else if (!StringUtils.hasText(name) && StringUtils.hasText(department)) {
+			pageResult = userRepository.findByDepartment(department, pageRequest);
+		}
+		else if (StringUtils.hasText(name) && StringUtils.hasText(department)) {
+			pageResult = userRepository.findByNameAndDepartment("^" + name, department,
+					pageRequest);
 		}
 		else {
 			pageResult = userRepository.findAll(pageRequest);

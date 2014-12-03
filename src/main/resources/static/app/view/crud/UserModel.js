@@ -3,13 +3,15 @@ Ext.define('SimpleApp.view.crud.UserModel', {
 	requires: [ 'SimpleApp.model.User' ],
 
 	data: {
-		selectedUser: null
+		selectedUser: null,
+		nameFilter: null,
+		departmentFilterCB: null
 	},
 
 	stores: {
 		users: {
 			model: 'SimpleApp.model.User',
-			autoLoad: false,
+			autoLoad: true,
 			pageSize: 25,
 			remoteSort: true,
 			remoteFilter: true,
@@ -17,6 +19,13 @@ Ext.define('SimpleApp.view.crud.UserModel', {
 			sorters: [ {
 				property: 'lastName',
 				direction: 'ASC'
+			} ],
+			filters: [ {
+				property: 'name',
+				value: '{nameFilter}'
+			}, {
+				property: 'department',
+				value: '{departmentFilterCB.value}'
 			} ]
 		}
 	}
