@@ -28,19 +28,14 @@ import ch.rasc.edsutil.optimizer.WebResourceProcessor;
 @EnableAutoConfiguration
 public class Application extends SpringBootServletInitializer {
 
-	private static SpringApplicationBuilder configureApp(
-			SpringApplicationBuilder application) {
-		return application.sources(Application.class);
-	}
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return configureApp(application);
+		return application.sources(Application.class);
 	}
 
 	public static void main(String[] args) throws Exception {
 		// -Dspring.profiles.active=development
-		configureApp(new SpringApplicationBuilder()).run(args);
+		new SpringApplicationBuilder().sources(Application.class).run(args);
 	}
 
 	@Bean
