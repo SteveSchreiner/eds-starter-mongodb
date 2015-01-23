@@ -37,7 +37,7 @@ public class TreeLoadService {
 
 		if ("root".equals(node) || !StringUtils.hasText(node)) {
 
-			List<Node> children = departmentRepository
+			List<Node> children = this.departmentRepository
 					.findAll(new Sort(Direction.ASC, "name")).stream()
 					.map(d -> new Node(d.getName(), d.getName(), false, false, null))
 					.collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class TreeLoadService {
 			return Collections.singletonList(root);
 		}
 
-		return userRepository
+		return this.userRepository
 				.findByDepartmentOrderByLastNameAsc(node)
 				.stream()
 				.map(u -> {

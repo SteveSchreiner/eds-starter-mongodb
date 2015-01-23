@@ -46,11 +46,11 @@ public class User {
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -58,7 +58,7 @@ public class User {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 	}
 
 	public void setLastName(String lastName) {
@@ -66,7 +66,7 @@ public class User {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -74,13 +74,14 @@ public class User {
 	}
 
 	public String getDepartment() {
-		return department;
+		return this.department;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", department=" + department + "]";
+		return "User [id=" + this.id + ", firstName=" + this.firstName + ", lastName="
+				+ this.lastName + ", email=" + this.email + ", department="
+				+ this.department + "]";
 	}
 
 }

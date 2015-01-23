@@ -47,19 +47,19 @@ public class UserService {
 		Pageable pageRequest = RepositoryUtil.createPageable(readRequest);
 
 		if (StringUtils.hasText(name) && !StringUtils.hasText(department)) {
-			pageResult = userRepository
+			pageResult = this.userRepository
 					.findByFirstNameStartsWithIgnoreCaseOrLastNameStartsWithIgnoreCaseOrEmailStartsWithIgnoreCase(
 							name, name, name, pageRequest);
 		}
 		else if (!StringUtils.hasText(name) && StringUtils.hasText(department)) {
-			pageResult = userRepository.findByDepartment(department, pageRequest);
+			pageResult = this.userRepository.findByDepartment(department, pageRequest);
 		}
 		else if (StringUtils.hasText(name) && StringUtils.hasText(department)) {
-			pageResult = userRepository.findByNameAndDepartment("^" + name, department,
-					pageRequest);
+			pageResult = this.userRepository.findByNameAndDepartment("^" + name,
+					department, pageRequest);
 		}
 		else {
-			pageResult = userRepository.findAll(pageRequest);
+			pageResult = this.userRepository.findAll(pageRequest);
 		}
 
 		return new ExtDirectStoreResult<>(pageResult.getTotalElements(),
@@ -69,19 +69,19 @@ public class UserService {
 	@ExtDirectMethod(STORE_MODIFY)
 	public ExtDirectStoreResult<User> create(User newUser) {
 		newUser.setId(null);
-		User insertedUser = userRepository.save(newUser);
+		User insertedUser = this.userRepository.save(newUser);
 		return new ExtDirectStoreResult<>(insertedUser);
 	}
 
 	@ExtDirectMethod(STORE_MODIFY)
 	public ExtDirectStoreResult<User> update(User changedUser) {
-		User updatedUser = userRepository.save(changedUser);
+		User updatedUser = this.userRepository.save(changedUser);
 		return new ExtDirectStoreResult<>(updatedUser);
 	}
 
 	@ExtDirectMethod(STORE_MODIFY)
 	public void destroy(User destroyedUser) {
-		userRepository.delete(destroyedUser);
+		this.userRepository.delete(destroyedUser);
 	}
 
 }

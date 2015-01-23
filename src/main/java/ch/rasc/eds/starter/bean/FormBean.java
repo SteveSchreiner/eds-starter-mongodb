@@ -15,7 +15,7 @@ public class FormBean {
 	private Date date;
 
 	public String getOsName() {
-		return osName;
+		return this.osName;
 	}
 
 	public void setOsName(String osName) {
@@ -23,7 +23,7 @@ public class FormBean {
 	}
 
 	public String getOsVersion() {
-		return osVersion;
+		return this.osVersion;
 	}
 
 	public void setOsVersion(String osVersion) {
@@ -31,7 +31,7 @@ public class FormBean {
 	}
 
 	public int getAvailableProcessors() {
-		return availableProcessors;
+		return this.availableProcessors;
 	}
 
 	public void setAvailableProcessors(int availableProcessors) {
@@ -39,7 +39,7 @@ public class FormBean {
 	}
 
 	public String getRemarks() {
-		return remarks;
+		return this.remarks;
 	}
 
 	public void setRemarks(String remarks) {
@@ -47,7 +47,7 @@ public class FormBean {
 	}
 
 	public Date getDate() {
-		return date;
+		return this.date;
 	}
 
 	public void setDate(Date date) {
@@ -56,9 +56,9 @@ public class FormBean {
 
 	@Override
 	public String toString() {
-		return "FormBean [osName=" + osName + ", osVersion=" + osVersion
-				+ ", availableProcessors=" + availableProcessors + ", remarks=" + remarks
-				+ ", date=" + date + "]";
+		return "FormBean [osName=" + this.osName + ", osVersion=" + this.osVersion
+				+ ", availableProcessors=" + this.availableProcessors + ", remarks="
+				+ this.remarks + ", date=" + this.date + "]";
 	}
 
 }

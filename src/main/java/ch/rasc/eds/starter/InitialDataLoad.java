@@ -36,7 +36,7 @@ public class InitialDataLoad {
 	}
 
 	private void init(ClassPathResource randomDataResource) throws IOException {
-		if (userRepository.count() == 0) {
+		if (this.userRepository.count() == 0) {
 
 			try (InputStream is = randomDataResource.getInputStream();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -47,10 +47,10 @@ public class InitialDataLoad {
 				reader.lines().map(line -> line.split(Pattern.quote("|")))
 						.map(s -> new User(s[0], s[1], s[2], s[3]))
 						.peek(u -> departments.add(u.getDepartment()))
-						.forEach(userRepository::save);
+						.forEach(this.userRepository::save);
 
 				departments.stream().map(Department::new)
-						.forEach(departmentRepository::save);
+						.forEach(this.departmentRepository::save);
 			}
 		}
 

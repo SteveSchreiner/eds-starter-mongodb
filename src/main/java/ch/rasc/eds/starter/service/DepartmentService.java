@@ -23,7 +23,7 @@ public class DepartmentService {
 
 	@ExtDirectMethod(STORE_READ)
 	public List<Department> read() {
-		return departmentRepository.findAll();
+		return this.departmentRepository.findAll();
 	}
 
 }
