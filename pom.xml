@@ -18,7 +18,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<ext.version>5.1.1.247-NIGHTLY</ext.version>
+		<ext.version>5.1.1.288-NIGHTLY</ext.version>
 
 		<mongodb.version>2.12.4</mongodb.version>
 
