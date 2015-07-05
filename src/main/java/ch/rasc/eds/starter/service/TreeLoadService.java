@@ -12,12 +12,12 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import ch.ralscha.extdirectspring.annotation.ExtDirectMethod;
 import ch.rasc.eds.starter.repository.DepartmentRepository;
 import ch.rasc.eds.starter.repository.UserRepository;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Service
 public class TreeLoadService {
@@ -46,12 +46,10 @@ public class TreeLoadService {
 			return Collections.singletonList(root);
 		}
 
-		return this.userRepository
-				.findByDepartmentOrderByLastNameAsc(node)
-				.stream()
+		return this.userRepository.findByDepartmentOrderByLastNameAsc(node).stream()
 				.map(u -> {
-					return new Node(u.getId().toString(), u.getLastName() + " "
-							+ u.getFirstName(), true, false, null);
+					return new Node(u.getId().toString(),
+							u.getLastName() + " " + u.getFirstName(), true, false, null);
 				}).collect(Collectors.toList());
 
 	}
